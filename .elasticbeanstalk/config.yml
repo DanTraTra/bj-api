@@ -1,5 +1,19 @@
 branch-defaults:
   main:
     environment: Bj-teacher-server-env
+environment-defaults:
+  Bj-teacher-server-env:
+    branch: null
+    repository: null
 global:
+  application_name: bj-teacher-server
+  default_ec2_keyname: bj-key-pair
+  default_platform: Node.js 20 running on 64bit Amazon Linux 2023
+  default_region: ap-southeast-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
   profile: eb-cli
+  sc: git
+  workspace_type: Application
