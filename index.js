@@ -7,11 +7,11 @@ app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-    user: 'bj_teacher',
-    host: 'database-bj-teacher-1.cl2wg0ma2r6v.ap-southeast-2.rds.amazonaws.com',
-    database: 'database_name_bj_teacher_1',
-    password: '7<`X15c#2rtS',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT || 5432,
 });
 
 app.get('/data', async (req, res) => {
