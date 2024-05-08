@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const {Pool} = require('pg');
@@ -11,7 +13,7 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 5432,
+    port: 5432,
 });
 
 app.get('/data', async (req, res) => {
@@ -33,11 +35,11 @@ app.post('/add-score', async (req, res) => {
         res.json(result.rows[0]);  // Send back the inserted row
     } catch (err) {
         console.error(err);
-        res.status(500).json('Server error');
+        res.status(500).json('Server error', err);
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 5432;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
