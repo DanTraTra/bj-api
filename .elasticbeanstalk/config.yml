@@ -1,10 +1,13 @@
 branch-defaults:
   main:
-    environment: Bj-teacher-server-env
+    environment: Bj-teacher-server-env-1
 environment-defaults:
   Bj-teacher-server-env:
     branch: null
     repository: null
+  Bj-teacher-server-env-1:
+    branch: main
+    repository: bj-api
 global:
   application_name: bj-teacher-server
   default_ec2_keyname: bj-key-pair
