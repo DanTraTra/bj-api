@@ -5,7 +5,10 @@ const cors = require('cors');
 const {Pool} = require('pg');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+}));
 app.use(express.json());
 
 const pool = new Pool({
@@ -16,7 +19,7 @@ const pool = new Pool({
     port: 5432,
 });
 
-app.get('/data', async (req, res) => {
+app.get('/api/data', async (req, res) => {
     try {
         const {rows} = await pool.query('SELECT * FROM userscore');
         res.json(rows);
@@ -28,7 +31,7 @@ app.get('/data', async (req, res) => {
 
 
 // Add a new user score
-app.post('/add-score', async (req, res) => {
+app.post('/api/add-score', async (req, res) => {
     const { user_id, score } = req.body;  // assuming the body contains user_id and score
     try {
         const result = await pool.query('INSERT INTO userscore (user_id, score) VALUES ($1, $2) RETURNING *', [user_id, score]);
