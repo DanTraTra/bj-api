@@ -42,7 +42,7 @@ app.post('/api/add-score', async (req, res) => {
     }
 });
 
-const PORT = 5432;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
