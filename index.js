@@ -6,7 +6,7 @@ const {Pool} = require('pg');
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'Bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com',
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
 app.use(express.json());
