@@ -25,14 +25,14 @@ app.get('/api/data', async (req, res) => {
         res.json(rows);
     } catch (err) {
         console.error(err);
-        res.status(500).json('Server error');
+        res.status(500).json({error: 'Internal Server Error', details: err.message});
     }
 });
 
 
 // Add a new user score
 app.post('/api/add-score', async (req, res) => {
-    const { user_id, score } = req.body;  // assuming the body contains user_id and score
+    const {user_id, score} = req.body;  // assuming the body contains user_id and score
     try {
         const result = await pool.query('INSERT INTO userscore (user_id, score) VALUES ($1, $2) RETURNING *', [user_id, score]);
         res.json(result.rows[0]);  // Send back the inserted row
