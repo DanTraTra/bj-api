@@ -6,7 +6,7 @@ const {Pool} = require('pg');
 
 const app = express();
 app.use(cors({
-    origin: 'Bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com',
+    origin: 'https://bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com',
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
 app.use(express.json());
@@ -17,6 +17,9 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: 5432,
+    ssl: {
+        rejectUnauthorized: false // Note: For production, you should have valid certificates and not use rejectUnauthorized: false
+    }
 });
 
 app.get('/api/data', async (req, res) => {
