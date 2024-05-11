@@ -6,7 +6,7 @@ const {Pool} = require('pg');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com'];
+const allowedOrigins = ['http://localhost:5173/', 'https://bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com'];
 
 app.use(cors({
     origin: function (origin, callback) {
