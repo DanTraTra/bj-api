@@ -6,7 +6,9 @@ const {Pool} = require('pg');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com'];
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com'];
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -27,6 +29,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));  // Enable preflight across-the-board
+app.use(express.json());
 
 const pool = new Pool({
     user: process.env.DB_USER,
