@@ -55,9 +55,9 @@ app.get('/api/data', async (req, res) => {
 
 // Add a new user score
 app.post('/api/add-score', async (req, res) => {
-    const {username, score} = req.body;  // assuming the body contains user_id and score
+    const {username, game_log_data} = req.body;  // assuming the body contains user_id and score
     try {
-        const result = await pool.query('INSERT INTO userscore (username, score) VALUES ($1, $2) RETURNING *', [username, score]);
+        const result = await pool.query('INSERT INTO userscore (username, game_log_data) VALUES ($1, $2) RETURNING *', [username, game_log_data]);
         res.json(result.rows[0]);  // Send back the inserted row
     } catch (err) {
         console.error(err);
