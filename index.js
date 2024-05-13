@@ -9,6 +9,7 @@ const app = express();
 const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:4173',
+    'https://daaaaan.com',
     'https://bj-teacher-server-env-1.eba-n9at9mkt.ap-southeast-2.elasticbeanstalk.com'];
 
 const corsOptions = {
