@@ -45,6 +45,20 @@ const pool = new Pool({
     }
 });
 
+// Health check endpoint
+app.get('/health', async (req, res) => {
+    try {
+        // Optionally check the database connection
+        const client = await pool.connect();  // Attempt to get a connection from the pool
+        client.release();  // Release the connection back to the pool
+        res.status(200).send('Healthy');
+    } catch (err) {
+        console.error('Health check failed:', err);
+        res.status(500).send('Unhealthy');
+    }
+});
+
+
 app.get('/api/data', async (req, res) => {
     try {
         const {rows} = await pool.query('SELECT * FROM userscore');
