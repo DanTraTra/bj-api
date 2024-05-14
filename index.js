@@ -42,7 +42,7 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     port: 5432,
     ssl: {
-        rejectUnauthorized: false // Note: For production, you should have valid certificates and not use rejectUnauthorized: false
+        rejectUnauthorized: true // Note: For production, you should have valid certificates and not use rejectUnauthorized: false
     }
 });
 
@@ -51,6 +51,7 @@ app.get('/health', async (req, res) => {
     try {
         // Optionally check the database connection
         const client = await pool.connect();  // Attempt to get a connection from the pool
+        console.log(client)
         client.release();  // Release the connection back to the pool
         res.status(200).send('Healthy');
     } catch (err) {
