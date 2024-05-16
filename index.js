@@ -1,10 +1,12 @@
 require('dotenv').config();
-
+const https = require('https');
 const express = require('express');
 const cors = require('cors');
 const {Pool} = require('pg');
+const fs = require('fs');
 
 const app = express();
+app.set('trust proxy', 1);  // Trust first proxy
 
 const allowedOrigins = [
     'http://localhost:5173',
@@ -34,6 +36,10 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));  // Enable preflight across-the-board
 app.use(express.json());
 
+https.createServer(options, app).listen(3000, () => {
+    console.log('Server is running on HTTPS at port 3000');
+});
+
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -41,7 +47,8 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     port: 5432,
     ssl: {
-        rejectUnauthorized: true // Note: For production, you should have valid certificates and not use rejectUnauthorized: false
+        rejectUnauthorized: true, // Note: For production, you should have valid certificates and not use rejectUnauthorized: false
+        ca: fs.readFileSync('/Users/dantra/Documents/Personal/ap-southeast-2-bundle.pem').toString()
     }
 });
 
@@ -50,7 +57,7 @@ app.get('/health', async (req, res) => {
     try {
         // Optionally check the database connection
         const client = await pool.connect();  // Attempt to get a connection from the pool
-        console.log(client)
+        // console.log("client", client)
         client.release();  // Release the connection back to the pool
         res.status(200).send('Healthy');
     } catch (err) {
