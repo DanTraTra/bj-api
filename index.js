@@ -38,10 +38,6 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));  // Enable preflight across-the-board
 app.use(express.json());
 
-https.createServer(options, app).listen(3000, () => {
-    console.log('Server is running on HTTPS at port 3000');
-});
-
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
