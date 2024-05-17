@@ -88,7 +88,7 @@ app.post('/api/add-score', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 8080;
 // const PORT = 80;
 
 app.listen(PORT, () => {
