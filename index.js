@@ -4,8 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const {Pool} = require('pg');
 const fs = require('fs');
-
 const app = express();
+
 app.set('trust proxy', 1);  // Trust first proxy
 
 const allowedOrigins = [
@@ -46,7 +46,7 @@ const pool = new Pool({
     port: 5432,
     ssl: {
         rejectUnauthorized: true, // Note: For production, you should have valid certificates and not use rejectUnauthorized: false
-        ca: fs.readFileSync('/Users/dantra/Documents/Personal/ap-southeast-2-bundle.pem').toString()
+        ca: fs.readFileSync(process.env.DB_CERT_PATH).toString()
     }
 });
 
